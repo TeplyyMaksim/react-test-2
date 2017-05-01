@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Practice makes perfect</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+  </head>
+  <body>
+    <div id="mount-point"></div>
+    <script type="text/babel">
+      var Timer = React.createClass({
+        getInitialState: function () {
+          return {
+            seconds: 0,
+            timerRun: true
+          }
+        },
+
+        componentDidMount: function () {
+          this.timer = setInterval(this.tick, 1000);
+        },
+
+        tick: function () {
+          this.setState({
+            seconds: this.state.seconds + 1
+          });
+        },
+        resetTimer: function () {
+          this.setState({
+            seconds: 0
+          })
+        },
+        toggleTimer: function () {
+          if (this.state.timerRun) {
+            this.setState({
+              timerRun: false
+            });
+            clearInterval(this.timer);
+          } else {
+            this.setState({
+              timerRun: true
+            });
+            this.timer = setInterval(this.tick, 1000);
+          }
+        },
+
+        componentWillUnmount: function () {
+          clearInterval(this.timer);
+        },
+
+        render: function() {
+          return (
+            <div>
+              <h2>Timer: {this.state.seconds}</h2>
+              <button onClick={this.resetTimer}>Reset</button>
+              <button onClick={this.toggleTimer}>{this.state.timerRun ? "Pause" : "Resume"}</button>
+            </div>
+          );
+        }
+      });
+
+      ReactDOM.render(
+        <Timer />,
+        document.getElementById('mount-point')
+      );
+    </script>
+  </body>
+</html>

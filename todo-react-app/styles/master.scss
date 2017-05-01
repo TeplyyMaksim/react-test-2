@@ -1,0 +1,81 @@
+/* Global variables and extends */
+$block-vertical-gap: 15px;
+$radius-size: 10px;
+$note-gap: 10px;
+
+$create-color: darkgreen;
+$create-background: lightgreen;
+$toggle-note-color: gold;
+$toggle-note-background: yellow;
+$delete-note-color: darkred;
+$delete-note-background: tomato;
+
+.button-right-rounding {
+  border-top-right-radius: $radius-size;
+  border-bottom-right-radius: $radius-size;
+  padding-right: $radius-size;
+}
+.button-left-rounding {
+  border-top-left-radius: $radius-size;
+  border-bottom-left-radius: $radius-size;
+  padding-left: $radius-size;
+}
+/* /Global variables and extends */
+
+.application {
+  h1 {
+    text-align: center;
+    padding: $block-vertical-gap 0 0 0;
+    margin: 0;
+  }
+
+  .adder {
+    margin-top: $block-vertical-gap;
+    input {
+      border: 1px solid $create-color;
+      border-right: none;
+      @extend .button-left-rounding;
+    }
+    button {
+      border: 1px solid $create-color;
+      background: $create-background;
+      @extend .button-right-rounding;
+    }
+  }
+
+  .filter {
+    margin-top: $block-vertical-gap;
+  }
+
+  .todo-list {
+    margin: $block-vertical-gap 0 0;
+    width: 400px;
+    list-style: none;
+    padding: 0;
+
+    .todo {
+      margin-bottom: $note-gap;
+
+      .crossed-completed-todo {
+        text-decoration: line-through;
+      }
+
+      .todo-controll-block {
+        white-space: nowrap;
+
+        .toggle-todo {
+          @extend .button-left-rounding;
+          border: 1px solid $toggle-note-color;
+          border-right: none;
+          background: $toggle-note-background;
+        }
+        .delete-todo {
+          border: 1px solid $delete-note-color;
+          @extend .button-right-rounding;
+          border-left: none;
+          background: $delete-note-background;
+        }
+      }
+    }
+  }
+}
